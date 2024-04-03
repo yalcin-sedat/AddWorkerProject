@@ -1,11 +1,13 @@
+import Button from "../UI/Button";
 import Card from "../UI/Card";
+
 
 const AddWorker = () => {
   return (
     <Card addClasse ="mt-10">
       <form className="flex flex-col gap-y-2">
       <label htmlFor="name" className="font-medium ">
-       Employee Name
+       Calisan ismi
       </label>
       <input
         type="text"
@@ -23,7 +25,7 @@ const AddWorker = () => {
         placeholder="Salary Amount"
         id="wage"
       />
-      <button className="p-2 text-lg bg-teal-700 text-white mt-2 rounded-xl">ADD</button>
+      <Button className="mt-2">ADD</Button>
     </form>
     </Card>
     
