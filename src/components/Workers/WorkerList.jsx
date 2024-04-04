@@ -8,6 +8,7 @@ const WorkerList = (props) => {
         return;
     }
 
+    
     const deleteWorker = (id) => {
         setWorkers(
             workers.filter((item) => item.id!== id)
@@ -15,23 +16,15 @@ const WorkerList = (props) => {
     };
     
 return (
-    <Card listClasse="mt-10">
+    <Card listClasse="mt-2">
         <ul>
-            <li className="flex justify-between p-2 bg-white rounded-xl mt-2">
-            
-                
-                <span className="font-bold text-black" >NAME</span>
-                <span className="font-bold text-black">SALARY</span>
-               
-            </li>
             {workers.map((worker)=>(
-            
             <li className="flex justify-between cursor-pointer hover:shadow-xl p-2 bg-white 
              rounded-xl mt-2 transition-shadow"
              key={worker.id}
              onClick={()=> deleteWorker(worker.id)}>
             
-            <span className="text-teal-700 font-medium"> {worker.name}   </span>
+            <span className="text-teal-700 font-medium pl-1"> {worker.name}   </span>
             <span className="text-teal-700 font-medium"> {worker.wage} $ </span>
    
             </li>))}
