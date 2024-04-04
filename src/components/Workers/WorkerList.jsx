@@ -1,23 +1,38 @@
 import Card from "../UI/Card"
 
 const WorkerList = (props) => {
+    const { workers ,setWorkers } = props;
+
+    //if dont have any worker return
+    if(workers.length < 1){
+        return;
+    }
+
+    const deleteWorker = (id) => {
+        setWorkers(
+            workers.filter((item) => item.id!== id)
+        );
+    };
+    
 return (
-    <Card className="mt-10">
+    <Card listClasse="mt-10">
         <ul>
             <li className="flex justify-between p-2 bg-white rounded-xl mt-2">
             
                 
-                <span className="font-bold text-black"  >Name</span>
-                <span className="font-bold text-black">Salary</span>
+                <span className="font-bold text-black" >NAME</span>
+                <span className="font-bold text-black">SALARY</span>
                
             </li>
-            {props.workers.map((worker)=>(
+            {workers.map((worker)=>(
             
-            <li  className="flex justify-between cursor-pointer hover:shadow-xl p-2 bg-white 
-             rounded-xl mt-2 transition-shadow">
+            <li className="flex justify-between cursor-pointer hover:shadow-xl p-2 bg-white 
+             rounded-xl mt-2 transition-shadow"
+             key={worker.id}
+             onClick={()=> deleteWorker(worker.id)}>
             
-            <span className="font-bold  text-black">     Sedat   </span>
-            <span className="text-teal-700 font-medium"> 50000 $ </span>
+            <span className="text-teal-700 font-medium"> {worker.name}   </span>
+            <span className="text-teal-700 font-medium"> {worker.wage} $ </span>
    
             </li>))}
         </ul>
