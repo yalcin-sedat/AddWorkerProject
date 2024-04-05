@@ -7,6 +7,7 @@ import ErrorModal from "../UI/ErrorModal";
 const AddWorker = (props) => {
   const [enteredWorkerName, setEnteredWorkerName] = useState("");
   const [enteredWage, setEnteredWage] = useState("");
+  const [error, setError] = useState();
 
   const mininumWage = 5000;
 
@@ -15,11 +16,19 @@ const AddWorker = (props) => {
 
     //Input not null
     if (enteredWorkerName.trim().length === 0 || enteredWorkerName.trim().length === 0) {
+      setError({
+       title: "ISIm Alani zorunlu...",
+       message:" Lütfen bir isim giriniz.",
+      });
       return;
     }
     //if Sallary > 5000 $
     if (+enteredWage < mininumWage) {
 
+      setError({
+        title: "Maas Alani zorunlu...",
+        message: `Lütfen ${mininumWage}degerinden büyük bir maas giriniz.`,
+       });
       return;
     }
 
@@ -34,9 +43,15 @@ const AddWorker = (props) => {
     setEnteredWorkerName("");
     setEnteredWage("");
   };
+
+  const errorHandler = () => {
+    setError(null);
+
+  }
   return (
     <div>
-      <ErrorModal/>
+      {error && <ErrorModal onConfirm={errorHandler} error={error}/>}
+
       <Card addClasse="mt-2">
       <form className="flex flex-col gap-y-2" onSubmit={addWorkerHandler}>
         <label htmlFor="name" className="font-medium text-white text-xs ">
