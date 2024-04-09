@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import ErrorModal from "../UI/ErrorModal";
+import Wrappers from "../Helpers/Wrappers";
 
 
 const AddWorker = (props) => {
@@ -17,8 +18,8 @@ const AddWorker = (props) => {
     //Input not null
     if (enteredWorkerName.trim().length === 0 || enteredWorkerName.trim().length === 0) {
       setError({
-       title: "ISIm Alani zorunlu...",
-       message:" Lütfen bir isim giriniz.",
+        title: "ISIm Alani zorunlu...",
+        message: " Lütfen bir isim giriniz.",
       });
       return;
     }
@@ -28,7 +29,7 @@ const AddWorker = (props) => {
       setError({
         title: "Maas Alani zorunlu...",
         message: `Lütfen ${mininumWage}degerinden büyük bir maas giriniz.`,
-       });
+      });
       return;
     }
 
@@ -49,38 +50,37 @@ const AddWorker = (props) => {
 
   }
   return (
-    <div>
-      {error && <ErrorModal onConfirm={errorHandler} error={error}/>}
+    <Wrappers>
+     {error && <ErrorModal key="error-modal" onConfirm={errorHandler} error={error} />} 
+      <Card addClasse="mt-2" key="card-add-worker">
+        <form className="flex flex-col gap-y-2" onSubmit={addWorkerHandler}>
+          <label htmlFor="name" className="font-medium text-white text-xs ">
+            Employee Name
+          </label>
+          <input
+            type="text"
+            className="max-w-[40rem] w-full mx-auto border p-2 border-spacing-2 rounded-xl"
+            placeholder="Employee Name"
+            id="name"
+            onChange={(e) => setEnteredWorkerName(e.target.value)}
+            value={enteredWorkerName}
+          />
 
-      <Card addClasse="mt-2">
-      <form className="flex flex-col gap-y-2" onSubmit={addWorkerHandler}>
-        <label htmlFor="name" className="font-medium text-white text-xs ">
-          Employee Name
-        </label>
-        <input
-          type="text"
-          className="max-w-[40rem] w-full mx-auto border p-2 border-spacing-2 rounded-xl"
-          placeholder="Employee Name"
-          id="name"
-          onChange={(e) => setEnteredWorkerName(e.target.value)}
-          value={enteredWorkerName}
-        />
-
-        <label htmlFor="wage" className="font-medium text-white text-xs ">
-          Salary Amount
-        </label>
-        <input
-          type="number"
-          className="max-w-[40rem] w-full mx-auto border p-2 rounded-xl"
-          placeholder="Salary Amount"
-          id="wage"
-          onChange={(e) => setEnteredWage(e.target.value)}
-          value={enteredWage}
-        />
-        <Button className="mt-2" type="submit">ADD</Button>
-      </form>
-    </Card>
-    </div>
+          <label htmlFor="wage" className="font-medium text-white text-xs ">
+            Salary Amount
+          </label>
+          <input
+            type="number"
+            className="max-w-[40rem] w-full mx-auto border p-2 rounded-xl"
+            placeholder="Salary Amount"
+            id="wage"
+            onChange={(e) => setEnteredWage(e.target.value)}
+            value={enteredWage}
+          />
+          <Button className="mt-2" type="submit">ADD</Button>
+        </form>
+      </Card>
+      </Wrappers>
 
   );
 };
